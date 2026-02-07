@@ -59,12 +59,6 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000
 5. 環境変数を設定
 6. 公開URLをSlack AppのRequest URLに設定
 
-## スリープ回避（軽量）
-
-- GitHub Actionsのkeepaliveを使って /health を15分ごとにping
-- リポジトリ設定 → Variables に KEEPALIVE_URL を追加
-  - 例: https://slackmemoryconcierge.onrender.com
-
 ## memUでの記憶
 
 - 決定事項・ToDoは「category=decisions」として保存
