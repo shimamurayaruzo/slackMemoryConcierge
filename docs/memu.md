@@ -116,3 +116,32 @@ console.log(await res.json());
 - 既存コードやツールから Authorization ヘッダで Bearer Token を付与
 - 意味検索やカテゴリ取得等、プロダクトのフローに組み込み
 
+# 識別子の扱い（MEMU_USER_ID / MEMU_TEAM_ID / MEMU_AGENT_ID）
+
+- MEMU_USER_ID: ユーザー識別子。個人単位で記憶を分けたい場合に使用
+- MEMU_TEAM_ID: チーム・ワークスペース等の共有識別子。UIで取得できない場合は「固定ID」を任意に決めて使っても良い
+- MEMU_AGENT_ID: このアプリ（エージェント）を識別するためのID
+
+本プロジェクトの設定では、MEMU_TEAM_ID が未設定の場合は MEMU_USER_ID を自動的に使用します（最終的に固定IDが必要なだけのため）。  
+そのため、最低限 MEMU_API_KEY と MEMU_USER_ID、MEMU_AGENT_ID を用意すれば動作します。チーム共有をしたい場合は MEMU_TEAM_ID に正式なIDを設定してください。
+
+## 環境変数設定例（Render / Windows）
+
+必須:
+- MEMU_API_KEY
+- MEMU_USER_ID
+- MEMU_AGENT_ID
+
+任意（設定があれば優先使用、未設定なら上記の MEMU_USER_ID を使用）:
+- MEMU_TEAM_ID
+
+PowerShell例:
+
+```
+$env:MEMU_API_KEY = "xxxx"
+$env:MEMU_USER_ID = "user_or_workspace_id"
+$env:MEMU_AGENT_ID = "slack-doc-bot"
+# 必要なら
+$env:MEMU_TEAM_ID = "team_workspace_id"
+```
+
